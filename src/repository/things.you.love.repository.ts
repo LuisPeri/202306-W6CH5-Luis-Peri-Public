@@ -31,10 +31,16 @@ export class ThingsYouLove {
     addThingsYouLove.id = idData[idData.length + 1].id;
     const newThingsYouLoveList = JSON.stringify([...idData, addThingsYouLove]);
     await fs.writeFile(file, newThingsYouLoveList, { encoding: 'utf8' });
-    console.log('yay :D');
+  }
+
+  async deleteById(id: string) {
+    const stringData = await fs.readFile(file, { encoding: 'utf-8' });
+    const idData = JSON.parse(stringData) as Things[];
+    const modifiedThingsYouLoveList = JSON.stringify(
+      idData.filter((things) => things.id !== id)
+    );
+    await fs.writeFile(file, modifiedThingsYouLoveList, { encoding: 'utf8' });
   }
 
   async patch() {}
-
-  async deleteById() {}
 }

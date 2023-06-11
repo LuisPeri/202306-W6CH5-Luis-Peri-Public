@@ -7,5 +7,5 @@ export const thingsYouLoveRouter = createRouter();
 thingsYouLoveRouter.get('/', controller.getAll.bind(controller));
 thingsYouLoveRouter.get('/:id', controller.getById.bind(controller));
 thingsYouLoveRouter.post('/', controller.post.bind(controller));
-thingsYouLoveRouter.patch('/:id', controller.patch.bind(controller));
+// En proceso: thingsYouLoveRouter.patch('/:id', controller.patch.bind(controller));
 thingsYouLoveRouter.delete('/:id', controller.deleteById.bind(controller));

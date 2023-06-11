@@ -15,19 +15,23 @@ export class ThingsYouLoveController {
     res.send(await this.repo.readAll());
   }
 
-  getById(req: Request, res: Response) {
-    res.send('Hello number: ' + req.params.id);
+  async getById(req: Request, res: Response) {
+    res.send(await this.repo.getById(req.params.id));
   }
 
-  post(req: Request, res: Response) {
-    res.send('Post Sample!: ' + req.body.user);
+  async post(req: Request, res: Response) {
+    res.send(await this.repo.post(req.body));
   }
 
+  async deleteById(req: Request, res: Response) {
+    await this.repo.deleteById(req.params.id);
+    res.send('I dont love this anymore');
+  }
+
+  /*
+  En proceso:
   patch(req: Request, res: Response) {
     res.send('Patch Sample!: ' + req.body.user);
   }
-
-  deleteById(req: Request, res: Response) {
-    res.send('Delete Sample!: ' + req.body.user);
-  }
+  */
 }
