@@ -25,7 +25,14 @@ export class ThingsYouLove {
     return idData.find((things) => things.id === id);
   }
 
-  async post() {}
+  async post(addThingsYouLove: Things) {
+    const stringData = await fs.readFile(file, { encoding: 'utf-8' });
+    const idData = JSON.parse(stringData) as Things[];
+    addThingsYouLove.id = idData[idData.length + 1].id;
+    const newThingsYouLoveList = JSON.stringify([...idData, addThingsYouLove]);
+    await fs.writeFile(file, newThingsYouLoveList, { encoding: 'utf8' });
+    console.log('yay :D');
+  }
 
   async patch() {}
 
