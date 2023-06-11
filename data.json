@@ -1,16 +1,16 @@
 [
   {
     "id": "1",
-    "user": "Rick&Morty"
+    "love": "Rick&Morty"
   },
 
   {
     "id": "2",
-    "user": "Pokemon"
+    "love": "Pokemon"
   },
 
   {
     "id": "3",
-    "user": "Digimon"
+    "love": "Digimon"
   }
 ]

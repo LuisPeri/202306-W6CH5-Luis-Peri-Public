@@ -26,4 +26,4 @@ app.get('/', (req, res) => {
   res.send('Hello Express!');
 });
 
-app.use('/sample', thingsYouLoveRouter);
+app.use('/thingsThatYouLove', thingsYouLoveRouter);
