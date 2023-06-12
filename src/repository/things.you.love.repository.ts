@@ -7,12 +7,12 @@ const debug = createDebug('W6:SampleRepo');
 
 const file = './data.json';
 
-export class ThingsYouLove {
+export class ThingsYouLoveRepo implements Repo<Things> {
   constructor() {
-    debug('things that you Repo');
+    debug('things that you love Repo');
   }
 
-  async query() {
+  async query(): Promise<Things[]> {
     const stringData = await fs.readFile(file, { encoding: 'utf-8' });
     const aData = JSON.parse(stringData) as Things[];
     return aData;

@@ -1,37 +1,55 @@
-import { Request, Response } from 'express';
-import { ThingsYouLove } from '../repository/things.you.love.repository.js';
+import { NextFunction, Request, Response } from 'express';
+import { ThingsYouLoveRepo } from '../repository/things.you.love.repository.js';
 import createDebug from 'debug';
 const debug = createDebug('W6:SampleController');
 
 export class ThingsYouLoveController {
-  repo: ThingsYouLove;
-  constructor() {
-    this.repo = new ThingsYouLove();
+  // eslint-disable-next-line no-unused-vars
+  constructor(private repo: ThingsYouLoveRepo) {
     debug('Instantiated SampleController');
     debug(this.repo);
   }
 
-  async getAll(req: Request, res: Response) {
-    res.send(await this.repo.readAll());
+  async getAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(await this.repo.query());
+    } catch (error) {
+      next(error);
+    }
   }
 
-  async getById(req: Request, res: Response) {
-    res.send(await this.repo.getById(req.params.id));
+  async getById(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(await this.repo.queryById(req.params.id));
+    } catch (error) {
+      next(error);
+    }
   }
 
-  async post(req: Request, res: Response) {
-    res.send(await this.repo.post(req.body));
+  async post(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.status(201);
+      res.send(await this.repo.create(req.body));
+    } catch (error) {
+      next(error);
+    }
   }
 
-  async deleteById(req: Request, res: Response) {
-    await this.repo.deleteById(req.params.id);
-    res.send('I dont love this anymore');
+  async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.status(204);
+      res.send(await this.repo.delete(req.params.id));
+    } catch (error) {
+      next(error);
+    }
   }
 
-  /*
-  En proceso:
-  patch(req: Request, res: Response) {
-    res.send('Patch Sample!: ' + req.body.user);
+  async patch(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.status(202);
+      res.send(await this.repo.update(req.params.id, req.body));
+    } catch (error) {
+      next(error);
+    }
   }
-  */
 }
