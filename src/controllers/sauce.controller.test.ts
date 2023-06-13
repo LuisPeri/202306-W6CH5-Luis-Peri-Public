@@ -3,7 +3,7 @@ import { SauceRepo } from '../repository/sauce.mongo.repository';
 import { SauceController } from './sauce.controller';
 
 describe('Given SauceController class', () => {
-  describe('When it is instantiated', () => {
+  describe('When it is instantiated and the methods are called', () => {
     const mockRepo: SauceRepo = {
       query: jest.fn(),
       queryById: jest.fn(),
@@ -25,10 +25,28 @@ describe('Given SauceController class', () => {
       expect(mockRepo.query).toHaveBeenCalled();
     });
 
-    test('Then method getById should be used', async () => {
+    test('Then method queryById should be used', async () => {
       await controller.getById(req, res, next);
       expect(res.send).toHaveBeenCalled();
       expect(mockRepo.queryById).toHaveBeenCalled();
+    });
+
+    test('Then method create should be used', async () => {
+      await controller.patch(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.update).toHaveBeenCalled();
+    });
+
+    test('Then method create should be used', async () => {
+      await controller.post(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.create).toHaveBeenCalled();
+    });
+
+    test('Then method delete should be used', async () => {
+      await controller.deleteById(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.delete).toHaveBeenCalled();
     });
   });
 });

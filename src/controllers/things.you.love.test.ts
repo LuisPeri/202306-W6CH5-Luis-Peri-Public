@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { ThingsYouLoveRepo } from '../repository/things.you.love.repository';
 import { ThingsYouLoveController } from './things.you.love.controller';
 
-describe('Given SampleController class', () => {
+describe('Given ThigsYouLoveController class', () => {
   describe('When it is instantiated', () => {
     const mockRepo: ThingsYouLoveRepo = {
       query: jest.fn(),
