@@ -31,7 +31,7 @@ describe('Given SauceController class', () => {
       expect(mockRepo.queryById).toHaveBeenCalled();
     });
 
-    test('Then method create should be used', async () => {
+    test('Then method update should be used', async () => {
       await controller.patch(req, res, next);
       expect(res.send).toHaveBeenCalled();
       expect(mockRepo.update).toHaveBeenCalled();

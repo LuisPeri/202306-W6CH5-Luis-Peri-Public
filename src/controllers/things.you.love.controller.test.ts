@@ -30,5 +30,23 @@ describe('Given ThigsYouLoveController class', () => {
       expect(res.send).toHaveBeenCalled();
       expect(mockRepo.queryById).toHaveBeenCalled();
     });
+
+    test('Then method patch should be used', async () => {
+      await controller.patch(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.update).toHaveBeenCalled();
+    });
+
+    test('Then method create should be used', async () => {
+      await controller.post(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.create).toHaveBeenCalled();
+    });
+
+    test('Then method delete should be used', async () => {
+      await controller.deleteById(req, res, next);
+      expect(res.send).toHaveBeenCalled();
+      expect(mockRepo.delete).toHaveBeenCalled();
+    });
   });
 });
