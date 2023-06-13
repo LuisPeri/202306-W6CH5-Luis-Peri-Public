@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import createDebug from 'debug';
 import { thingsYouLoveRouter } from './routers/things.you.love.router.js';
+import { errorHandler } from './middleware/error.js';
 const debug = createDebug('W6:App');
 
 export const app = express();
@@ -27,3 +28,5 @@ app.get('/', (req, res) => {
 });
 
 app.use('/thingsThatYouLove', thingsYouLoveRouter);
+
+app.use(errorHandler);
