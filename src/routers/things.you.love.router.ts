@@ -3,6 +3,10 @@ import { ThingsYouLoveController } from '../controllers/things.you.love.controll
 import { Things } from '../entities/things.js';
 import { ThingsYouLoveRepo } from '../repository/things.you.love.repository.js';
 import { Repo } from '../repository/repo.js';
+import createDebug from 'debug';
+
+const debug = createDebug('W6:SampleRouter');
+debug('Executed');
 
 const repo: Repo<Things> = new ThingsYouLoveRepo();
 const controller = new ThingsYouLoveController(repo);
