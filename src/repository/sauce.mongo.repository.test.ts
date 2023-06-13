@@ -18,4 +18,13 @@ describe('Given a SauceRepo class', () => {
       expect(result).toEqual([]);
     });
   });
+
+  // En proceso: describe("When its istantiate and method queryById is called", () => {
+  //   test("Then queryById and exec should have been called", async () => {
+  //    const mockId = "12"
+  //    const exec = jest.fn().mockResolvedValue(mockId);
+  //    SauceModel.findById = jest.fn().mockRejectedValueOnce
+  //   })
+  //   expect id toEqual = result
+  // })
 });
