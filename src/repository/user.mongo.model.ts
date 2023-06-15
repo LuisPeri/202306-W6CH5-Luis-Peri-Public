@@ -1,20 +1,24 @@
 import { Schema, model } from 'mongoose';
-import { Sauce } from '../entities/sauce';
+import { User } from '../entities/user.js';
 
-const sauceSchema = new Schema<Sauce>({
-  title: {
+const userSchema = new Schema<User>({
+  userName: {
     type: String,
     required: true,
     unique: true,
   },
-  bought: {
-    type: Boolean,
+  email: {
+    type: String,
     required: true,
     unique: true,
   },
+  passwd: {
+    type: String,
+    required: true,
+  },
 });
 
-sauceSchema.set('toJSON', {
+userSchema.set('toJSON', {
   transform(_document, returnedObject) {
     returnedObject.id = returnedObject._id;
     delete returnedObject.__v;
@@ -23,5 +27,4 @@ sauceSchema.set('toJSON', {
   },
 });
 
-export const SauceModel = model('Thing', sauceSchema, 'things');
-// Chuleta: modelo, objeto tipo, coleccion a la que pertenece
+export const UserModel = model('User', userSchema, 'users');
