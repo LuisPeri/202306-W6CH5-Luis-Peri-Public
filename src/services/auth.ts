@@ -2,8 +2,7 @@ import { hash, compare } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { secret } from '../config.js';
 import { HttpError } from '../types/http.error.js';
-
-type PayloadToken = {
+export type PayloadToken = {
   id: string;
   userName: string;
 } & jwt.JwtPayload;
@@ -17,12 +16,16 @@ export class AuthServices {
   }
 
   static verifyJWTGettingPayload(token: string) {
-    const result = jwt.verify(token, secret!);
-    if (typeof result === 'string') {
-      throw new HttpError(498, 'Invalid Token', result);
-    }
+    try {
+      const result = jwt.verify(token, secret!);
+      if (typeof result === 'string') {
+        throw new HttpError(498, 'Invalid Token', result);
+      }
 
-    return result;
+      return result as PayloadToken;
+    } catch (error) {
+      throw new HttpError(498, 'Invalid Token', (error as Error).message);
+    }
   }
 
   static hash(value: string) {

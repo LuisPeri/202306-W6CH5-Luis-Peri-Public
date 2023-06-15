@@ -12,6 +12,10 @@ const sauceSchema = new Schema<Sauce>({
     required: true,
     unique: true,
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 sauceSchema.set('toJSON', {
