@@ -9,7 +9,7 @@ const file = './data.json';
 const createID = (): Things['id'] =>
   Math.trunc(Math.random() * 1_000_000).toString();
 
-export class ThingsYouLoveRepo implements Repo<Things> {
+export class ThingsYouLoveRepo implements Partial<Repo<Things>> {
   constructor() {
     debug('things that you love Repo');
   }

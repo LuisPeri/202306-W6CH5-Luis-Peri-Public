@@ -7,7 +7,7 @@ import createDebug from 'debug';
 const debug = createDebug('W6:BookController');
 
 export class SauceController extends Controller<Sauce> {
-  constructor(protected repo: SauceRepo) {
+  constructor(public repo: SauceRepo) {
     super();
     debug('instantiated');
   }

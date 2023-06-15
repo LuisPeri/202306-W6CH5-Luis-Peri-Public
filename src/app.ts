@@ -2,10 +2,10 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import createDebug from 'debug';
-import { thingsYouLoveRouter } from './routers/things.you.love.router.js';
 import { errorHandler } from './middleware/error.js';
 import { sauceRouter } from './routers/sauce.router.js';
 import { userRouter } from './routers/user.router.js';
+import { thingsYouLoveRouter } from './routers/things.you.love.router.js';
 const debug = createDebug('W6:App');
 
 export const app = express();

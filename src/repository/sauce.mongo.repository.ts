@@ -5,7 +5,7 @@ import { Repo } from './repo.js';
 import { HttpError } from '../types/http.error.js';
 const debug = createDebug('W6:BookRepo');
 
-export class SauceRepo implements Repo<Sauce> {
+export class SauceRepo implements Partial<Repo<Sauce>> {
   constructor() {
     debug('Instantiated');
   }
@@ -19,6 +19,17 @@ export class SauceRepo implements Repo<Sauce> {
     const result = await SauceModel.findById(id).exec();
     if (result === null)
       throw new HttpError(404, 'Not found', 'Bad id for the query');
+    return result;
+  }
+
+  async search({
+    key,
+    value,
+  }: {
+    key: string;
+    value: unknown;
+  }): Promise<Sauce[]> {
+    const result = await SauceModel.find({ [key]: value }).exec();
     return result;
   }
 

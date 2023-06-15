@@ -1,14 +1,14 @@
 import { Router as createRouter } from 'express';
 import { ThingsYouLoveController } from '../controllers/things.you.love.controller.js';
-import { Things } from '../entities/things.js';
 import { ThingsYouLoveRepo } from '../repository/things.you.love.repository.js';
 import { Repo } from '../repository/repo.js';
+import { Things } from '../entities/things.js';
+
 import createDebug from 'debug';
-
 const debug = createDebug('W6:SampleRouter');
-debug('Executed');
 
-const repo: Repo<Things> = new ThingsYouLoveRepo();
+debug('Executed');
+const repo: Repo<Things> = new ThingsYouLoveRepo() as Repo<Things>;
 const controller = new ThingsYouLoveController(repo);
 export const thingsYouLoveRouter = createRouter();
 

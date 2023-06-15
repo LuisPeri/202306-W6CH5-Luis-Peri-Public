@@ -10,6 +10,7 @@ describe('Given SauceController class', () => {
       create: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
+      search: jest.fn(),
     };
     const req = {
       params: { id: 1 },
