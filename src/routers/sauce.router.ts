@@ -6,12 +6,14 @@ import { Sauce } from '../entities/sauce.js';
 import { AuthInterceptor } from '../middleware/auth.interceptor.js';
 import createDebug from 'debug';
 import { UserRepo } from '../repository/user.mongo.repository.js';
+import { User } from '../entities/user.js';
 const debug = createDebug('W6:BookRouter');
 
 debug('Executed');
-const userRepo = new UserRepo
-const repo: Repo<Sauce> = new SauceRepo();
-const controller = new SauceController(repo: SauceRepo, userRepo: UserRepo);
+
+const repo: Repo<Sauce> = new SauceRepo() as Repo<Sauce>;
+const repo2: Repo<User> = new UserRepo() as Repo<User>;
+const controller = new SauceController(repo, repo2);
 const auth = new AuthInterceptor();
 export const sauceRouter = createRouter();
 

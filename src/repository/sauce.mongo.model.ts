@@ -27,5 +27,5 @@ sauceSchema.set('toJSON', {
   },
 });
 
-export const SauceModel = model('Thing', sauceSchema, 'things');
+export const SauceModel = model('Sauce', sauceSchema, 'Sauces');
 // Chuleta: modelo, objeto tipo, coleccion a la que pertenece
