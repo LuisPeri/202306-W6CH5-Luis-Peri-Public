@@ -51,6 +51,7 @@
     "inquirer": "^9.2.7",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
   }
 }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import { user, password, db } from '../config';
+import { user, password, db } from '../config.js';
 dotenv.config();
 
 export const dbConnect = () => {
