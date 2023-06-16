@@ -11,7 +11,7 @@ const debug = createDebug('W6:BookRouter');
 debug('Executed');
 const userRepo = new UserRepo
 const repo: Repo<Sauce> = new SauceRepo();
-const controller = new SauceController(repo: SauceRepo, userRepo: UserRepo) as SauceController;
+const controller = new SauceController(repo: SauceRepo, userRepo: UserRepo);
 const auth = new AuthInterceptor();
 export const sauceRouter = createRouter();
 

@@ -48,8 +48,8 @@ function main() {
 
   const handleClick = async () => {
     if (!state.token) return;
-    const urlBooks = url + '/book';
-    const response = await fetch(urlBooks, {
+    const urlSauce = url + '/sauce';
+    const response = await fetch(urlSauce, {
       headers: {
         Authorization: 'Bearer ' + state.token,
       },
