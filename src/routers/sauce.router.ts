@@ -14,7 +14,7 @@ debug('Executed');
 const repo: Repo<Sauce> = new SauceRepo() as Repo<Sauce>;
 const repo2: Repo<User> = new UserRepo() as Repo<User>;
 const controller = new SauceController(repo, repo2);
-const auth = new AuthInterceptor();
+const auth = new AuthInterceptor(repo);
 export const sauceRouter = createRouter();
 
 sauceRouter.get('/', controller.getAll.bind(controller));
@@ -23,10 +23,12 @@ sauceRouter.post('/', controller.post.bind(controller));
 sauceRouter.patch(
   '/:id',
   auth.logged.bind(auth),
+  auth.authorized.bind(auth),
   controller.patch.bind(controller)
 );
 sauceRouter.delete(
   '/:id',
   auth.logged.bind(auth),
+  auth.authorized.bind(auth),
   controller.deleteById.bind(controller)
 );

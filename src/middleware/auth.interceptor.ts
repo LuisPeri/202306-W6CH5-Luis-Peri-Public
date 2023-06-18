@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { HttpError } from '../types/http.error.js';
-import { AuthServices } from '../services/auth.js';
+import { AuthServices, PayloadToken } from '../services/auth.js';
 
 import createDebug from 'debug';
+import { SauceRepo } from '../repository/sauce.mongo.repository.js';
 const debug = createDebug('W6:AuthInterceptor');
 export class AuthInterceptor {
-  constructor() {
+  // eslint-disable-next-line no-unused-vars
+  constructor(private sauceRepo: SauceRepo) {
     debug('Instantiated');
   }
 
@@ -28,6 +30,29 @@ export class AuthInterceptor {
       const payload = AuthServices.verifyJWTGettingPayload(token);
 
       req.body.tokenPayload = payload;
+      next();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async authorized(req: Request, res: Response, next: NextFunction) {
+    try {
+      if (!req.body.tokenPayload) {
+        throw new HttpError(
+          498,
+          'Token not found',
+          'Token not found in Authorized interceptor'
+        );
+      }
+
+      const { id: userID } = req.body.tokenPayload as PayloadToken;
+      const { id: sauceId } = req.params;
+      const sauce = await this.sauceRepo.queryById(sauceId);
+      if (sauce.owner.id !== userID) {
+        throw new HttpError(401, 'Not authorized', 'Not authorized');
+      }
+
       next();
     } catch (error) {
       next(error);

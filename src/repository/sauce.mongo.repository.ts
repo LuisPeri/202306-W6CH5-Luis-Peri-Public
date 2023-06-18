@@ -11,12 +11,14 @@ export class SauceRepo implements Partial<Repo<Sauce>> {
   }
 
   async query(): Promise<Sauce[]> {
-    const aData = await SauceModel.find().exec();
+    const aData = await SauceModel.find()
+      .populate('owner', { Sauce: 0 })
+      .exec();
     return aData;
   }
 
   async queryById(id: string): Promise<Sauce> {
-    const result = await SauceModel.findById(id).exec();
+    const result = await SauceModel.findById(id).populate('owner').exec();
     if (result === null)
       throw new HttpError(404, 'Not found', 'Bad id for the query');
     return result;
